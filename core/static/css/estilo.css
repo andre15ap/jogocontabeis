@@ -21,6 +21,11 @@
   font-size: 30px;  
 }
 
+.texto-pergunta{
+  color: black;
+  font-weight: bold;
+}
+
 
 .martin-card {
   margin: 30px;

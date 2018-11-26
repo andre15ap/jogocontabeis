@@ -36,7 +36,7 @@
 
 {% if object.pontos >= 0 %}
 <script>
-var n = 10;
+var n = 15;
 var l = document.getElementById("number");
 window.setInterval(function(){
   l.innerHTML = n;
@@ -62,7 +62,7 @@ window.setInterval(function(){
     <p class="card-text">
     <div class="card">
       <div class="card-body">
-        {{pergunta}}
+        <span class="texto-pergunta">{{pergunta}}</span>
         {% for resposta in pergunta.respostas.all %}
             {% if resposta in pontuacao.respostas_computadas.all %}
                 {% if resposta.verdade %}

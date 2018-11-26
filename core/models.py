@@ -63,7 +63,7 @@ class Pontuacao(models.Model):
     # questoes = models.PositiveIntegerField('questoes realizadas', default=0, blank=True)
 
     def __str__(self):
-        return '{} - {} pontos '.format(str(self.usuario), self.pontos)
+        return '{} '.format(str(self.usuario))
 
     def total_realizado(self):
         return self.perguntas_realizadas.count()
