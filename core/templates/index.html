@@ -21,13 +21,17 @@
 	<div class="card">
   <h5 class="card-header">Escolha uma sala</h5>
   <div class="card-body">
-    <h5 class="card-title">Salas disponiveis</h5>
+    {% comment %} <h5 class="card-title">Salas disponiveis</h5> {% endcomment %}
     <p class="card-text">
 			{% comment %} <select class="form-control"> {% endcomment %}
 			  {% for sala in salas %}
 				<p>
-				<a href="{% url 'comecar' sala.id %}" class="btn btn-primary">Clique para entrar - {{sala}}</a>
-				</p>
+        <div class="card text-center">
+          {% comment %} <div class="card-body"> {% endcomment %}
+				    <a href="{% url 'comecar' sala.id %}" class="card-body texto-grande-link">Sala: {{sala}}</a>
+          {% comment %} </div> {% endcomment %}
+          </div>
+        </p>
 				{% endfor %}
 			{% comment %} </select> {% endcomment %}
 		</p>
