@@ -5,6 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from core.views import IndexView, ComecarView, PertuntasView, PontuacaoListView,UsuarioCriarView
 
+from core.forms import LoginForm
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -13,7 +15,7 @@ urlpatterns = [
     path('pergunta/<int:pk>/<int:r>', PertuntasView.as_view(), name='pergunta'),
     path('classificacao/<int:pk>', PontuacaoListView.as_view(), name='pontuacao_list'),
     
-    path('entrar',LoginView.as_view(), name='login'),
+    path('entrar',LoginView.as_view(authentication_form=LoginForm), name='login'),
     path('registrar',UsuarioCriarView.as_view(), name='registrar'),
     path('sair',LogoutView.as_view(), name='logout')
 ]
