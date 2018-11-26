@@ -25,7 +25,13 @@ SECRET_KEY = 'p&*%z39ak126&)v3-h9mf-p5^cn!-yi!(ag63t-(z0c&%#kum1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+PRODUCAO = True
+
+if PRODUCAO:
+    ALLOWED_HOSTS = ['jogocontabeis.pythonanywhere.com']
+else:
+    ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -117,6 +123,11 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y',)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+
+
+if PRODUCAO:
+    STATIC_ROOT = 'home/jogocontabeis/jogocontabeis/core/static'
 
 STATIC_URL = '/static/'
 
