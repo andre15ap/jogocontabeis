@@ -1,0 +1,169 @@
+{% extends "base/base.html" %}
+{% load geral_tags %}
+
+{% block title %}
+  pergunta | {{ block.super }}
+{% endblock %}
+
+{% block conteudo %}
+
+{% if not acabou %}
+	<h2>{{object}} - Pergunta {{q}} </h2>
+	<h2> Tempo: <span id="number"></span></h2>
+	<hr \>
+<div class="card">
+  <h5 class="card-header">Pergunta: {{pergunta}}</h5>
+  <div class="card-body">
+    {% comment %} <h5 class="card-title">Opcoes</h5> {% endcomment %}
+    <p class="card-text">
+			
+			  {% for resposta in respostas %}
+          <p>
+            <a href="{% url 'pergunta' pontuacao.id resposta.id %}" class="">
+              <div class="card ">
+                <div class="card-body">
+                 <span class="texto-resposta">{{forloop.counter|indice}}- {{resposta.texto}}</span>
+                </div>
+              </div>
+            </a>
+          <p>
+				{% endfor %}
+			
+		</p>
+  </div>
+    </div>
+
+
+{% if object.pontos >= 0 %}
+<script>
+var n = 10;
+var l = document.getElementById("number");
+window.setInterval(function(){
+  l.innerHTML = n;
+  n--;
+  if (n == 0){
+    location.reload();
+  }
+},1000);
+</script>
+{% endif %}
+
+{% else %}
+
+
+<div class="card">
+  <div class="card-header">
+    <h3>Seu Resultado. {{pontuacao.pontos}} Pontos</h3>
+  </div>
+  <div class="card-body">
+    {% comment %} <h4 class="card-title"></h4> {% endcomment %}
+    
+    {% for pergunta in pontuacao.perguntas_realizadas.all %}
+    <p class="card-text">
+    <div class="card">
+      <div class="card-body">
+        {{pergunta}}
+        {% for resposta in pergunta.respostas.all %}
+            {% if resposta in pontuacao.respostas_computadas.all %}
+                {% if resposta.verdade %}
+                    <br><span class="cor-certo">{{forloop.counter|indice}}- {{resposta}}</span> 
+                {% else %}
+                    <br><span class="cor-errado">{{forloop.counter|indice}}- {{resposta}}</span> 
+                {% endif %}
+            {% else %}
+            <br><span>{{forloop.counter|indice}}- {{resposta}}</span>
+            {% endif %}
+        {% endfor %}
+      </div>
+      </div>
+    </p>
+    {% endfor %}
+    
+    <a href="{% url 'pontuacao_list' pontuacao.sala.id %}" class="btn btn-primary">Ver Classificação Geral</a>
+  </div>
+  <div class="card-footer text-muted">
+    André Assunção | Wanderson
+  </div>
+</div>
+{% endif %}
+
+<script>
+
+
+
+/**  
+ noback v0.0.1 
+ library for prevent backbutton 
+ Author: Kiko Mesquita: http://twitter.com/kikomesquita 
+ Based on stackoverflow 
+ * Copyright (c) 2015 @ kikomesquita 
+*/ 
+
+(function(window) { 
+  'use strict'; 
+ 
+var noback = { 
+	 
+	//globals 
+	version: '0.0.1', 
+	history_api : typeof history.pushState !== 'undefined', 
+	 
+	init:function(){ 
+		window.location.hash = '#no-back'; 
+		noback.configure(); 
+	}, 
+	 
+	hasChanged:function(){ 
+		if (window.location.hash == '#no-back' ){ 
+			window.location.hash = '#BLOQUEIO';
+			//mostra mensagem que não pode usar o btn volta do browser
+			if($( "#msgAviso" ).css('display') =='none'){
+				$( "#msgAviso" ).slideToggle("slow");
+			}
+		} 
+	}, 
+	 
+	checkCompat: function(){ 
+		if(window.addEventListener) { 
+			window.addEventListener("hashchange", noback.hasChanged, false); 
+		}else if (window.attachEvent) { 
+			window.attachEvent("onhashchange", noback.hasChanged); 
+		}else{ 
+			window.onhashchange = noback.hasChanged; 
+		} 
+	}, 
+	 
+	configure: function(){ 
+		if ( window.location.hash == '#no-back' ) { 
+			if ( this.history_api ){ 
+				history.pushState(null, '', '#BLOQUEIO'); 
+			}else{  
+				window.location.hash = '#BLOQUEIO';
+				//mostra mensagem que não pode usar o btn volta do browser
+				if($( "#msgAviso" ).css('display') =='none'){
+					$( "#msgAviso" ).slideToggle("slow");
+				}
+			} 
+		} 
+		noback.checkCompat(); 
+		noback.hasChanged(); 
+	} 
+	 
+	}; 
+	 
+	// AMD support 
+	if (typeof define === 'function' && define.amd) { 
+		define( function() { return noback; } ); 
+	}  
+	// For CommonJS and CommonJS-like 
+	else if (typeof module === 'object' && module.exports) { 
+		module.exports = noback; 
+	}  
+	else { 
+		window.noback = noback; 
+	} 
+	noback.init();
+}(window));
+</script>
+
+{% endblock %}

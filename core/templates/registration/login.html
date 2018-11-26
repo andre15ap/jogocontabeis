@@ -1,0 +1,85 @@
+
+
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  login | {{ block.super }}
+{% endblock %}
+
+{% block conteudo %}
+
+{% if messages %}
+   {% for msg in messages %}
+     <div class="alert alert-{{msg.level_tag}}" role="alert">
+            {{msg.message}}
+           </div>
+   {% endfor %}
+{% endif %} 
+
+  <!-- <h1 class="font-grande negrito">Login</h1> -->
+
+
+<!-- 
+    {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+        {{error}}
+      </div>
+    {% endfor %} -->
+
+    {% for error in form.non_field_errors %}
+     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  <div class="row justify-content-center">
+  <div class="col-12 col-md-5">
+    <div class="card">
+      <div class=" text-center">
+          <div class="alert alert-info" role="alert">
+              <h3 class="negrito">Entrar | Labins</h3>
+            </div>
+        
+        <img src="{% static 'img/uft.jpg' %}"/>
+        <hr>
+      </div>
+      {% comment %} <img class="card-img-top" src="{% static 'img/uft.jpg' %}" alt="Card image cap img"> {% endcomment %}
+      <div class="card-body">
+      <form class="" action="" method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group row">
+            <div class="col-sm-2">
+            {{ field.label_tag }}
+            </div>
+            <div class="col-sm-10">
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+              {% endif %}
+              {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+              
+              
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-success btn-lg float-right">Entrar</button>   
+        
+      </form>
+    </div>
+  </div>
+  <a href="{% url 'registrar' %}">Não possui conta</a>
+</div>
+</div>
+   
+
+
+{% endblock %}

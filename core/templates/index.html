@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+
+
+{% block title %}
+  login | {{ block.super }}
+{% endblock %}
+
+{% block conteudo %}
+
+    {% for error in form.non_field_errors %}
+     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+	<h2>Olá {{user}}</h2>
+	<hr \>
+
+	<div class="card">
+  <h5 class="card-header">Escolha uma sala</h5>
+  <div class="card-body">
+    <h5 class="card-title">Salas disponiveis</h5>
+    <p class="card-text">
+			{% comment %} <select class="form-control"> {% endcomment %}
+			  {% for sala in salas %}
+				<p>
+				<a href="{% url 'comecar' sala.id %}" class="btn btn-primary">Clique para entrar - {{sala}}</a>
+				</p>
+				{% endfor %}
+			{% comment %} </select> {% endcomment %}
+		</p>
+    
+  </div>
+</div>
+
+{% endblock %}
