@@ -25,14 +25,16 @@
     <p class="card-text">
 			{% comment %} <select class="form-control"> {% endcomment %}
 			  {% for sala in salas %}
-				<p>
-        <div class="card text-center">
+				
+        <div class="card text-center shadow p-3 mb-5 bg-white rounded">
           {% comment %} <div class="card-body"> {% endcomment %}
-				    <a href="{% url 'comecar' sala.id %}" class="card-body texto-grande-link">Sala: {{sala}}</a>
+				    <a href="{% url 'comecar' sala.id %}" class="card-body texto-grande-link botao">Sala: {{sala}}</a>
           {% comment %} </div> {% endcomment %}
           </div>
-        </p>
+        
 				{% endfor %}
+
+        
 			{% comment %} </select> {% endcomment %}
 		</p>
     

@@ -15,21 +15,17 @@
   <h5 class="card-header">Pergunta: {{pergunta}}</h5>
   <div class="card-body">
     {% comment %} <h5 class="card-title">Opcoes</h5> {% endcomment %}
-    <p class="card-text">
 			
 			  {% for resposta in respostas %}
-          <p>
-            <a href="{% url 'pergunta' pontuacao.id resposta.id %}" class="">
-              <div class="card ">
-                <div class="card-body">
-                 <span class="texto-resposta">{{forloop.counter|indice}}- {{resposta.texto}}</span>
-                </div>
-              </div>
+    		<p class="card shadow p-3 mb-5 bg-white rounded">
+         
+            <a href="{% url 'pergunta' pontuacao.id resposta.id %}" class="card-body texto-resposta botao">
+              {{forloop.counter|indice}} - {{resposta.texto}}
             </a>
-          <p>
+         
+				</p>
 				{% endfor %}
 			
-		</p>
   </div>
     </div>
 
@@ -60,7 +56,7 @@ window.setInterval(function(){
     
     {% for pergunta in pontuacao.perguntas_realizadas.all %}
     <p class="card-text">
-    <div class="card">
+    <div class="card  shadow p-3 mb-5 bg-white rounded">
       <div class="card-body">
         <span class="texto-pergunta">{{pergunta}}</span>
         {% for resposta in pergunta.respostas.all %}
