@@ -25,7 +25,7 @@ SECRET_KEY = 'p&*%z39ak126&)v3-h9mf-p5^cn!-yi!(ag63t-(z0c&%#kum1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-PRODUCAO = False
+PRODUCAO = True
 
 if PRODUCAO:
     ALLOWED_HOSTS = ['jogocontabeis.pythonanywhere.com']
