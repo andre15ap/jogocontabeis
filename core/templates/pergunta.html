@@ -8,14 +8,17 @@
 {% block conteudo %}
 
 {% if not acabou %}
+	   {% if participou %}
+			<h2 class="alert alert-primary">{{msg}} </h2><br>
+		<a class="btn btn-primary btn-lg btn-block" href="{% url 'index' %}">Inicio</a>
+		<br>
+		{% endif %}
 	<h2>{{object}} - Pergunta {{q}} </h2>
 	<h2> Tempo: <span id="number"></span></h2>
 	<hr \>
 <div class="card">
   <h5 class="card-header">Pergunta: {{pergunta}}</h5>
   <div class="card-body">
-    {% comment %} <h5 class="card-title">Opcoes</h5> {% endcomment %}
-			
 			  {% for resposta in respostas %}
     		<p class="card shadow p-3 mb-5 bg-white rounded">
          
@@ -67,7 +70,7 @@ window.setInterval(function(){
                     <br><span class="cor-errado">{{forloop.counter|indice}}- {{resposta}}</span> 
                 {% endif %}
             {% else %}
-            <br><span>{{forloop.counter|indice}}- {{resposta}}</span>
+            <br><span>{{forloop.counter|indice}}- {{resposta}} {% if resposta.verdade %} <span class="cor-certo">(C) </span>{% endif %} </span>
             {% endif %}
         {% endfor %}
       </div>

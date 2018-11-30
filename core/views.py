@@ -64,6 +64,14 @@ class ComecarView(LoginRequiredMixin, DetailView):
 		sala = SalaResposta.objects.get(id=id)
 		pont = Pontuacao.objects.filter(usuario=usuario, sala=sala)
 		if pont.count() > 0:
+			## para jogar so uma vez
+			# participou = True
+			# msg =  'Você ja participou dessa sala, vá para outra!'
+			# context['msg'] = msg
+			# context['participou'] = participou
+			# return context
+			
+			## para continuar jogango 
 			for p in pont:
 				pontuacao = p
 				break
@@ -71,6 +79,7 @@ class ComecarView(LoginRequiredMixin, DetailView):
 			pontuacao.pontos = 0
 			pontuacao.perguntas_realizadas.clear()
 			pontuacao.respostas_computadas.clear()
+
 		else:
 			pontuacao = Pontuacao(usuario=usuario, sala=sala, pontos=0)
 		pontuacao.save()
