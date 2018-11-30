@@ -127,7 +127,7 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y',)
 
 
 if PRODUCAO:
-    STATIC_ROOT = 'jogocontabeis/jogocontabeis/core/static'
+    STATIC_ROOT = 'home/jogocontabeis/jogocontabeis/core/static'
 else:
     STATIC_ROOT = 'core/static'
 
